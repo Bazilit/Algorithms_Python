@@ -1,0 +1,5 @@
+def input_nombers():
+	a = int(input())
+	b = int(input())
+	return a + b
+print(input_nombers())
