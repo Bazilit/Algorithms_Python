@@ -1,0 +1,7 @@
+x = input().lower() #Переводит ввод заглавных букв в строчные
+x1 = "".join(c for c in x if c.isalnum()) #Убирает из строчки пробелы и символы, оставляя текст и цифры
+i = str(x1)[::-1]
+if str(x1) == i:
+	print(True)
+else:
+	print(False)
