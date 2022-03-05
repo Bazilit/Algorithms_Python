@@ -1,0 +1,18 @@
+def neighbors(matrix, y, x): #x-координата по оси x(горизонт), у-вертикаль по у
+    h = []
+    if x + 1 < len(matrix[0]):
+        h.append(matrix[y][x + 1]) #Если координата меньше длины строки, то забираем левого соседа
+    if x - 1 >= 0:
+        h.append(matrix[y][x - 1]) #Если координата равна 0 или больше 0, то забираем правого соседа
+    if y + 1 < len(matrix):
+        h.append(matrix[y + 1][x]) # Аналогично x, это верхний сосед
+    if y - 1 >= 0:
+        h.append(matrix[y - 1][x]) # Аналогично x, это нижний сосед
+    return h
+
+
+n = int(input())
+m = int(input())
+matrix = [list(map(int, input().split())) for i in range(n)] #Создается матрица с длиной строки n
+y, x = int(input()), int(input()) #координаты
+print(*sorted(neighbors(matrix, y, x)))
