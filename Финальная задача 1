@@ -1,0 +1,31 @@
+# id 65846389
+
+n = int(input())
+street = list(map(int, input().strip().split()))
+
+# создаем список с номерами индексов "0"
+zero_list = [i for i in range(n) if street[i] == 0]
+
+zero_position = zero_list[0]
+next_zero = zero_list[-1] if len(zero_list) == 1 else zero_list[1]
+count = 1
+
+# Вычисляем растояние для всех позиций на интервале [0;zero_position]
+for i in range(zero_position):
+    street[i] = zero_position - i
+# Вычисляем растояние для всех позиций на интервале [next_zero;zero_list[-1]]
+# Внутренний интервал между начальным и крайним "0"
+# Если в строке не ноль, то высчитываем кратчайшее растояние. Иначе: сдвиг ячейки
+for i in range(zero_position + 1, zero_list[-1]):
+    if street[i]:
+        street[i] = min(i - zero_position, next_zero - i)
+    else:
+        count += 1
+        zero_position = next_zero
+        next_zero = zero_list[count]
+# Вычисляем растояние для всех позиций на интервале [next_zero;n]
+# Данное вычисление для крайних чисел в строке
+for i in range(next_zero, n):
+    street[i] = i - next_zero
+print(' '.join(map(str, street)))
+
