@@ -1,0 +1,8 @@
+n = int(input())
+word = input().split()
+c = ['0']
+for i in range(len(word)):
+	if len(word[i]) != len(c) and len(word[i]) > len(c):
+		c = word[i]
+print(c)
+print(len(c))
