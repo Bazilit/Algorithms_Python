@@ -1,0 +1,67 @@
+class StackMax:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if self.items == []:
+            print("error")
+        else:
+            return self.items.pop()
+
+    def get_max(self):
+        if self.items == []:
+            return None
+        else:
+            return max(self.items)
+
+def stack_max(number_commands, commands):
+    stack = StackMax()
+    number = 0
+    for number in range(number_commands):
+        if 'push' in commands[number]:
+            stack.push(int(commands[number][1]))
+        elif 'pop' in commands[number]:
+            stack.pop()
+        elif 'get_max' in commands[number]:
+            print(stack.get_max())
+
+if __name__ == '__main__':
+    number_commands = int(input())
+    commands = []
+    for i in range(number_commands):
+        row = input().split()
+        commands.append(row)
+    stack_max(number_commands, commands)
+    
+    
+    
+# Формат ввода
+# В первой строке записано одно число n — количество команд, которое не превосходит 10000. В следующих n строках идут команды. Команды могут быть следующих видов:
+
+# push(x) — добавить число x в стек;
+# pop() — удалить число с вершины стека;
+# get_max() — напечатать максимальное число в стеке;
+# Если стек пуст, при вызове команды get_max() нужно напечатать «None», для команды pop() — «error».
+
+# Формат вывода
+# Для каждой команды get_max() напечатайте результат её выполнения. Если стек пустой, для команды get_max() напечатайте «None». Если происходит удаление из пустого стека — напечатайте «error».
+
+# Пример 1
+# Ввод
+# 8
+# get_max
+# push 7
+# pop
+# push -2
+# push -1
+# pop
+# get_max
+# get_max
+
+# вывод
+# None
+# -2
+# -2
