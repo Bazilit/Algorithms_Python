@@ -1,0 +1,90 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def peek(self):
+        return self.items[-1]
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+
+class StackMaxEffective(Stack):
+    def __init__(self):
+        super().__init__()
+        self.max_item = Stack()
+
+    def push(self, item):
+        self.items.append(item)
+        if self.max_item.isEmpty():
+            self.max_item.push(item)
+        elif self.max_item.peek() <= item:
+            self.max_item.push(item)
+
+    def pop(self):
+        if self.isEmpty():
+            return print("error")
+        removed_item = self.items.pop()
+        if removed_item == self.max_item.peek():
+            self.max_item.pop()
+        return removed_item
+
+    def get_max(self):
+        if self.isEmpty():
+            return None
+        return self.max_item.peek()
+
+def stack_max(number_commands, commands):
+    stack = StackMaxEffective()
+    for number in range(number_commands):
+        if 'push' in commands[number]:
+            stack.push(int(commands[number][1]))
+        elif 'pop' in commands[number]:
+            stack.pop()
+        elif 'get_max' in commands[number]:
+            print(stack.get_max())
+
+if __name__ == '__main__':
+    number_commands = int(input())
+    commands = []
+    for i in range(number_commands):
+        row = input().split()
+        commands.append(row)
+    stack_max(number_commands, commands)
+    
+# Формат ввода
+# Ограничитель времени: 1,5сек 
+# В первой строке записано одно число — количество команд, оно не превосходит 100000. Далее идут команды по одной в строке. Команды могут быть следующих видов:
+
+# push(x) — добавить число x в стек;
+# pop() — удалить число с вершины стека;
+# get_max() — напечатать максимальное число в стеке;
+# Если стек пуст, при вызове команды get_max нужно напечатать «None», для команды pop — «error».
+# Формат вывода
+# Для каждой команды get_max() напечатайте результат её выполнения. Если стек пустой, для команды get_max() напечатайте «None». Если происходит удаление из пустого стека — напечатайте «error».
+
+# Пример 1
+# Ввод
+# 10
+# pop
+# pop
+# push 4
+# push -5
+# push 7
+# pop
+# pop
+# get_max
+# pop
+# get_max
+
+# Вывод
+# error
+# error
+# 4
+# None
