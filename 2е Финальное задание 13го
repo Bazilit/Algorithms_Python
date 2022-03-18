@@ -1,0 +1,49 @@
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+def polish_calculator(symbols):
+    stack = Stack()
+    for symbol in symbols:
+        if is_number(symbol):
+            stack.push(symbol)
+        else:
+            assert symbol in '+-*/', 'Недопустимый знак операции' + str(symbol)
+            if symbol == '+':
+                y = float(stack.pop())
+                x = float(stack.pop())
+                z = x + y
+                stack.push(z)
+            if symbol == '-':
+                y = float(stack.pop())
+                x = float(stack.pop())
+                z = x - y
+                stack.push(z)
+            if symbol == '/':
+                y = float(stack.pop())
+                x = float(stack.pop())
+                z = x // y
+                stack.push(z)
+            if symbol == '*':
+                y = float(stack.pop())
+                x = float(stack.pop())
+                z = x * y
+                stack.push(z)
+    return int(stack.pop())
+
+symbols = input().split()
+print(polish_calculator(symbols))
+
