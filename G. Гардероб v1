@@ -1,0 +1,16 @@
+n = int(input())
+
+def wardrobe(n):
+    if n < 3:
+        count_list = [0] * 3
+    else:
+        count_list = [0] * n
+    for i in map(int, input().split()):
+        count_list[i] += 1
+    result = []
+    len_elem = len(count_list)
+    for i in range(len_elem):
+        result.extend([i] * count_list[i])
+    print(*result)
+
+wardrobe(n)
