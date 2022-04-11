@@ -1,0 +1,12 @@
+child = int(input())
+greed_childrens = sorted(list(map(int, input().split())), reverse=True)
+cooke = int(input())
+size_cookes = sorted(list(map(int, input().split())))
+
+happy_child = 0
+
+for i in range(len(greed_childrens)):
+    if size_cookes and greed_childrens[i] <= size_cookes[-1]:
+        size_cookes.pop()
+        happy_child += 1
+print(happy_child)
